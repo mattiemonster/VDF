@@ -53,7 +53,14 @@ namespace VDFExplorer.Forms
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GeneralUtil.NotImplementedError();
+            DialogResult result = MessageBox.Show("Are you sure you want to close?", "Editor closing", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                NewVDF newVDF = new NewVDF(menuForm);
+                newVDF.Show();
+                Close();
+            } 
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
