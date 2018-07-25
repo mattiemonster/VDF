@@ -5,10 +5,11 @@ namespace VDFLib.Items
     [Serializable]
     public class VDFIntItem : VDFItem
     {
-        public int value = 0;
+        // public new int value = 0;
+        public const string typeString = "int";
 
         public VDFIntItem(string name, int value)
-            : base(name)
+            : base(name, "int")
         {
             this.value = value;
         }

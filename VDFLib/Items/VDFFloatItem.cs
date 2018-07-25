@@ -5,10 +5,11 @@ namespace VDFLib.Items
     [Serializable]
     public class VDFFloatItem : VDFItem
     {
-        public float value = 0.0f;
+        // public new float value = 0.0f;
+        public const string typeString = "float";
 
         public VDFFloatItem(string name, float value)
-            : base(name)
+            : base(name, "float")
         {
             this.value = value;
         }

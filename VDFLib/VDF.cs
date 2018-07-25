@@ -71,5 +71,33 @@ namespace VDFLib
             stream.Close();
         }
 
+        public override string ToString()
+        {
+            StringWriter sr = new StringWriter();
+            sr.WriteLine("VDF Name: " + name);
+            foreach (VDFCatagory cat in catagories)
+            {
+                sr.WriteLine("Catagory (Name: " + cat.name + ")");
+                foreach (VDFItem item in cat.items)
+                {
+                    sr.WriteLine("Item in Catagory " + cat.name);
+                    sr.WriteLine("Name: " + item.name);
+                    sr.WriteLine("Type: " + item.type);
+                    sr.WriteLine("Value: " + item.value);
+                }
+            }
+
+            sr.WriteLine("Items in root catagory:");
+
+            foreach (VDFItem item in items)
+            {
+                sr.WriteLine("Name: " + item.name);
+                sr.WriteLine("Type: " + item.type);
+                sr.WriteLine("Value: " + item.value);
+            }
+
+            return sr.ToString();
+        }
+
     }
 }

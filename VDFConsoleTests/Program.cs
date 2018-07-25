@@ -106,15 +106,9 @@ namespace VDFConsoleTests
                 return;
             }
         }
-
-        /// <summary>
-        /// Main method
-        /// </summary>
-        /// <param name="args">Command line arguments</param>
-        static void Main(string[] args)
+        
+        static void CreateVDFTest()
         {
-            Console.ForegroundColor = ConsoleColor.White;
-            PrintInfo("VDF Console Tests");
             PrintInfo("Save Test");
 
             // Get filename
@@ -145,7 +139,51 @@ namespace VDFConsoleTests
             CreateVDF();
             vdf.Save(filename + ".vdf");
 
-            WaitForKeypress();
+            PrintSuccess("Saved VDF!");
+
+            return;
+        }
+
+        static void LoadVDFTest()
+        {
+            string fileToLoad = GetInput("VDF file to load (no extension): ");
+            loadedVDF = VDFReader.LoadVDF(fileToLoad + ".vdf");
+
+            PrintInfo(loadedVDF.ToString());
+        }
+
+        static void GetCMD()
+        {
+            string cmd = GetInput("> ");
+            if (cmd == "create")
+            {
+                CreateVDFTest();
+                GetCMD();
+            } else if (cmd == "load")
+            {
+                LoadVDFTest();
+                GetCMD();
+            } else if (cmd == "exit")
+            {
+                return;
+            } else
+            {
+                PrintError("Command not found!");
+                GetCMD();
+            }
+        }
+
+        /// <summary>
+        /// Main method
+        /// </summary>
+        /// <param name="args">Command line arguments</param>
+        static void Main(string[] args)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            PrintInfo("VDF Console Tests");
+
+            PrintInfo("Type 'create' for the creation test, 'load' for the loading test or 'exit' to quit.");
+            GetCMD();
         }
 
     }

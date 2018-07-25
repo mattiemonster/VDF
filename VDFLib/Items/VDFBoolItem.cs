@@ -5,10 +5,11 @@ namespace VDFLib.Items
     [Serializable]
     public class VDFBoolItem : VDFItem
     {
-        public bool value = false;
+        // public new bool value = false;
+        public const string typeString = "bool";
 
         public VDFBoolItem(string name, bool value)
-            : base(name)
+            : base(name, "bool")
         {
             this.value = value;
         }
