@@ -15,6 +15,7 @@ namespace VDFLib
         public VDFCatagory(string newName)
         {
             name = newName;
+            items = new List<VDFItem>();
         }
 
         public void AddItem(VDFItem item)
