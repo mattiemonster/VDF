@@ -60,7 +60,7 @@ namespace VDFExplorer.Forms
                 NewVDF newVDF = new NewVDF(menuForm);
                 newVDF.Show();
                 Close();
-            } 
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
