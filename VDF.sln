@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VDFConsoleTests", "VDFConso
 		{BFA0B44A-F15F-4C8F-9665-0E22A5561451} = {BFA0B44A-F15F-4C8F-9665-0E22A5561451}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VDFExplorer", "VDFExplorer\VDFExplorer.csproj", "{DFFE089B-C2B8-4377-BBAA-02ECF32E3CBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{04734F67-A1C6-41EB-BFDC-FC9F9E9D6F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04734F67-A1C6-41EB-BFDC-FC9F9E9D6F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04734F67-A1C6-41EB-BFDC-FC9F9E9D6F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFFE089B-C2B8-4377-BBAA-02ECF32E3CBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFFE089B-C2B8-4377-BBAA-02ECF32E3CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFFE089B-C2B8-4377-BBAA-02ECF32E3CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFFE089B-C2B8-4377-BBAA-02ECF32E3CBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
