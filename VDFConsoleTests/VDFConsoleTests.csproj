@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VDFLib\VDFLib.csproj">
+      <Project>{bfa0b44a-f15f-4c8f-9665-0e22a5561451}</Project>
+      <Name>VDFLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
