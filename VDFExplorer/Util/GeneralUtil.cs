@@ -16,5 +16,11 @@ namespace VDFExplorer.Util
             MessageBox.Show("Not Implemented: " + extendedMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Log.LogError("Not Implemented: " + extendedMessage);
         }
+
+        public static void Error(string message)
+        {
+            MessageBox.Show("Erorr: " + message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Log.LogError(message);
+        }
     }
 }
