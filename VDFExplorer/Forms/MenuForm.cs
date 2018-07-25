@@ -18,5 +18,17 @@ namespace VDFExplorer.Forms
             Log.LogInfo("Exiting...");
             Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NewVDF newVDF = new NewVDF(this);
+            newVDF.Show();
+            Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            GeneralUtil.NotImplementedError();
+        }
     }
 }

@@ -51,11 +51,21 @@
     <Compile Include="Forms\MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NewVDF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewVDF.Designer.cs">
+      <DependentUpon>NewVDF.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Log.cs" />
+    <Compile Include="Util\GeneralUtil.cs" />
     <EmbeddedResource Include="Forms\MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewVDF.resx">
+      <DependentUpon>NewVDF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,6 +88,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VDFLib\VDFLib.csproj">
+      <Project>{bfa0b44a-f15f-4c8f-9665-0e22a5561451}</Project>
+      <Name>VDFLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
