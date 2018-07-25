@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 using VDFLib.Items;
 
@@ -55,7 +57,19 @@ namespace VDFLib
             items.RemoveAt(index);
         }
 
+        public void Save(FileStream stream)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, this);
+        }
 
+        public void Save(string path)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, this);
+            stream.Close();
+        }
 
     }
 }
