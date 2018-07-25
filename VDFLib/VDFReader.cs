@@ -4,7 +4,7 @@
     {
         public static VDF LoadVDF(string path)
         {
-            return new VDF();
+            return new VDF("Temp VDF");
         }
     }
 }
