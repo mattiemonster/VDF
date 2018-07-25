@@ -5,7 +5,7 @@ namespace VDFLib.Items
     [Serializable]
     public class VDFFloatItem : VDFItem
     {
-        public float value = 0;
+        public float value = 0.0f;
 
         public VDFFloatItem(string name, float value)
             : base(name)
