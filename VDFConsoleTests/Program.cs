@@ -8,17 +8,20 @@ using VDFLib.Items;
 
 namespace VDFConsoleTests
 {
+    /// <summary>
+    /// VDF Console Based Tests
+    /// </summary>
     public class Program
     {
-        public static string filename;
-        public static string vdfName;
-        public static string stringToWrite;
-        public static string catagoryName;
-        public static string catagoryString;
-        public static int intToWrite;
+        public static string filename;         // Name of VDF file
+        public static string vdfName;          // Name of the VDF
+        public static string stringToWrite;    // String to write to the root of the VDF
+        public static string catagoryName;     // Name of the catagory to add to the VDF
+        public static string catagoryString;   // String to write inside of the catagory
+        public static int intToWrite;          // Int to write to the root of the VDF
 
-        public static VDF vdf;
-        public static VDF loadedVDF;
+        public static VDF vdf;                 // VDF used by the create test
+        public static VDF loadedVDF;           // VDF used by the load test
 
         /// <summary>
         /// Print a message
@@ -82,6 +85,9 @@ namespace VDFConsoleTests
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Create a VDF based of data gathered
+        /// </summary>
         static void CreateVDF()
         {
             vdf = new VDF(vdfName);
@@ -92,6 +98,9 @@ namespace VDFConsoleTests
             vdf.AddItem(new VDFIntItem("Int", intToWrite));
         }
 
+        /// <summary>
+        /// Get an int and save it to intToWrite
+        /// </summary>
         static void GetIntToSave()
         {
             ConsoleKeyInfo ki = GetKey("Int to save: ");
@@ -136,6 +145,7 @@ namespace VDFConsoleTests
             catagoryString = GetInput("String inside first catagory: ");
             PrintSuccess("Set the string inside of the first catagory to: " + catagoryString);
 
+            // Create and save VDF
             CreateVDF();
             vdf.Save(filename + ".vdf");
 
@@ -144,6 +154,9 @@ namespace VDFConsoleTests
             return;
         }
 
+        /// <summary>
+        /// Test that loads a vdf file and prints information about it
+        /// </summary>
         static void LoadVDFTest()
         {
             string fileToLoad = GetInput("VDF file to load (no extension): ");
@@ -152,21 +165,24 @@ namespace VDFConsoleTests
             PrintInfo(loadedVDF.ToString());
         }
 
+        /// <summary>
+        /// Get the command from the user
+        /// </summary>
         static void GetCMD()
         {
             string cmd = GetInput("> ");
-            if (cmd == "create")
+            if (cmd == "create") // Open create test
             {
                 CreateVDFTest();
                 GetCMD();
-            } else if (cmd == "load")
+            } else if (cmd == "load") // Open load test
             {
                 LoadVDFTest();
                 GetCMD();
-            } else if (cmd == "exit")
+            } else if (cmd == "exit") // Exit program
             {
                 return;
-            } else
+            } else // Command not found
             {
                 PrintError("Command not found!");
                 GetCMD();
