@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VDFLib
+﻿namespace VDFLib
 {
     public class VDFReader
     {

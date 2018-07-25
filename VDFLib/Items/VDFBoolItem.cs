@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace VDFLib.Items
 {
+    [Serializable]
     public class VDFBoolItem : VDFItem
     {
         public bool value = false;

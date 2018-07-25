@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace VDFLib.Items
 {
+    [Serializable]
     public class VDFFloatItem : VDFItem
     {
         public float value = 0;
