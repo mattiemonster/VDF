@@ -257,7 +257,7 @@ namespace VDFExplorer.Forms
             return result;
         }
 
-        private static DialogResult ShowIntBox(ref int input, string title)
+        private static DialogResult ShowIntBox(ref int input, string title, decimal maxValue)
         {
             System.Drawing.Size size = new System.Drawing.Size(inputBoxWidth, 70);
             Form inputBox = new Form();
@@ -269,7 +269,7 @@ namespace VDFExplorer.Forms
             NumericUpDown numericUpDown = new NumericUpDown();
             numericUpDown.Size = new System.Drawing.Size(size.Width - 10, 23);
             numericUpDown.Location = new System.Drawing.Point(5, 5);
-            numericUpDown.Maximum = decimal.MaxValue;
+            numericUpDown.Maximum = maxValue;
             inputBox.Controls.Add(numericUpDown);
 
             Button okButton = new Button();
@@ -309,7 +309,7 @@ namespace VDFExplorer.Forms
             switch(type)
             {
                 case VDFItemType.String:
-                    string input = "";
+                    string input = "String";
                     ShowInputDialog(ref input, "Set string");
                     item = new VDFStringItem(itemName, input);
                     break;
@@ -320,7 +320,7 @@ namespace VDFExplorer.Forms
                     break;
                 case VDFItemType.Int:
                     int intInput = 0;
-                    ShowIntBox(ref intInput, "Set int");
+                    ShowIntBox(ref intInput, "Set int", int.MaxValue);
                     item = new VDFIntItem(itemName, intInput);
                     break;
                 default:
@@ -337,7 +337,7 @@ namespace VDFExplorer.Forms
 
         void Rename()
         {
-            string newName = "";
+            string newName = vdf.name;
             ShowInputDialog(ref newName, "Rename VDF");
             vdf.name = newName;
             vdfNameText.Text = "VDF Name: " + vdf.name;
