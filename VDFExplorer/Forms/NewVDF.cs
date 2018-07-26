@@ -69,6 +69,7 @@ namespace VDFExplorer.Forms
             editor.SetPath(pathTextBox.Text);
             recent.AddItem(pathTextBox.Text);
             recent.Save();
+            menuForm.RefreshRecentItems();
             editor.Show();
             closedByUser = false;
             Close();
