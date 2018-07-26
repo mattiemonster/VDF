@@ -79,6 +79,14 @@ namespace VDFLib
             savePath = path;
         }
 
+        public void Save()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, this);
+            stream.Close();
+        }
+
         public override string ToString()
         {
             StringWriter sr = new StringWriter();
