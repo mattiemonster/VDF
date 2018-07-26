@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using VDFExplorer.Util;
 
@@ -28,7 +29,27 @@ namespace VDFExplorer.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            GeneralUtil.NotImplementedError();
+            Log.LogInfo("Opening VDF file");
+            DialogResult result = openDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                Log.LogInfo("Opening: " + openDialog.FileName);
+
+                if (!File.Exists(openDialog.FileName))
+                {
+                    GeneralUtil.Error("File not found.");
+                    return;
+                }
+
+                Editor editor = new Editor(this);
+                editor.OpenVDF(openDialog.FileName);
+                editor.Show();
+                Hide();
+            } else
+            {
+                Log.LogInfo("VDF Opening cancelled");
+            }
         }
     }
 }

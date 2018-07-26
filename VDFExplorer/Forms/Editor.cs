@@ -9,6 +9,8 @@ namespace VDFExplorer.Forms
     public partial class Editor : Form
     {
         public MenuForm menuForm;
+        public VDF vdf;
+        public string savePath;
 
         public Editor(MenuForm menu)
         {
@@ -20,12 +22,18 @@ namespace VDFExplorer.Forms
 
         public void OpenVDF(string path)
         {
-            GeneralUtil.NotImplementedError();
+            vdf = VDFReader.LoadVDF(path);
+            savePath = vdf.savePath;
+
+            GeneralUtil.Info("VDF Name: " + vdf.name);
         }
 
         public void OpenVDF(VDF vdf)
         {
-            GeneralUtil.NotImplementedError();
+            this.vdf = vdf;
+            savePath = vdf.savePath;
+
+            GeneralUtil.Info("VDF Name: " + vdf.name);
         }
 
         private void exitEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,7 +78,16 @@ namespace VDFExplorer.Forms
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GeneralUtil.NotImplementedError();
+            DialogResult result = openFileDialog1.ShowDialog();
+            Log.LogInfo("Browsing for VDF to open");
+            if (result == DialogResult.OK)
+            {
+                OpenVDF(openFileDialog1.FileName);
+            } else
+            {
+                Log.LogInfo("Browse cancelled");
+                return;
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

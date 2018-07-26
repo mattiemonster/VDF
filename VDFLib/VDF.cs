@@ -14,11 +14,17 @@ namespace VDFLib
         public List<VDFCatagory> catagories;
         public List<VDFItem> items;
         public string name;
+        public string savePath;
 
         public VDF(string newName)
         {
             name = newName;
             Init();
+        }
+
+        public void SetSavePath(string newPath)
+        {
+            savePath = newPath;
         }
 
         public void Init()
@@ -61,6 +67,7 @@ namespace VDFLib
         {
             IFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, this);
+            savePath = stream.Name;
         }
 
         public void Save(string path)
@@ -69,6 +76,7 @@ namespace VDFLib
             FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, this);
             stream.Close();
+            savePath = path;
         }
 
         public override string ToString()

@@ -22,5 +22,11 @@ namespace VDFExplorer.Util
             MessageBox.Show("Erorr: " + message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Log.LogError(message);
         }
+
+        public static void Info(string message)
+        {
+            MessageBox.Show(message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Log.LogInfo(message);
+        }
     }
 }

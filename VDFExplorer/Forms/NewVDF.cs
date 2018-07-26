@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using VDFExplorer.Util;
+using VDFLib;
 using System.Windows.Forms;
 
 namespace VDFExplorer.Forms
@@ -58,8 +59,12 @@ namespace VDFExplorer.Forms
                 return;
             }
 
+            VDF vdf = new VDF(nameTextBox.Text);
+            vdf.Save(pathTextBox.Text);
+
             Editor editor = new Editor(menuForm);
             editor.Show();
+            editor.OpenVDF(vdf);
             closedByUser = false;
             Close();
         }

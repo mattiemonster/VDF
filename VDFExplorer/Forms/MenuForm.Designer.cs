@@ -34,6 +34,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -96,6 +97,13 @@
             this.listBox1.Size = new System.Drawing.Size(360, 264);
             this.listBox1.TabIndex = 5;
             // 
+            // openDialog
+            // 
+            this.openDialog.DefaultExt = "vdf";
+            this.openDialog.FileName = "VDF";
+            this.openDialog.Filter = "VDF Files|*.vdf";
+            this.openDialog.Title = "Open VDF file";
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,6 +132,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.OpenFileDialog openDialog;
     }
 }
 
