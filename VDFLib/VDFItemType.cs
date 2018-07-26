@@ -8,6 +8,8 @@ namespace VDFLib
         String = 0,
         Int = 1,
         Float = 2,
-        Boolean = 3
+        Boolean = 3,
+        Double = 4,
+        Long = 5
     }
 }
