@@ -28,5 +28,19 @@ namespace VDFExplorer.Util
             MessageBox.Show(message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Log.LogInfo(message);
         }
+
+        public static bool AskYesNo(string message, string title)
+        {
+            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            switch(result)
+            {
+                case DialogResult.Yes:
+                    return true;
+                case DialogResult.No:
+                    return false;
+                default:
+                    return false;
+            }
+        }
     }
 }

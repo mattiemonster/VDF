@@ -17,7 +17,9 @@ namespace VDFExplorer.Forms
         public Dictionary<VDFCatagory, TreeNode> catagoryNodes;
         public Dictionary<VDFItem, TreeNode> itemNodes;
 
-        public Editor(MenuForm menu)
+        public RecentItems recentItems;
+
+        public Editor(MenuForm menu, RecentItems newRecentItems)
         {
             InitializeComponent();
             menuForm = menu;
@@ -27,6 +29,8 @@ namespace VDFExplorer.Forms
             catagoryNodes = new Dictionary<VDFCatagory, TreeNode>();
             itemNodes = new Dictionary<VDFItem, TreeNode>();
             treeView1.Nodes.Clear();
+
+            recentItems = newRecentItems;
         }
 
         public void OpenVDF(string path)
@@ -81,7 +85,7 @@ namespace VDFExplorer.Forms
                 MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                NewVDF newVDF = new NewVDF(menuForm);
+                NewVDF newVDF = new NewVDF(menuForm, recentItems);
                 newVDF.Show();
                 Close();
             }
@@ -99,6 +103,9 @@ namespace VDFExplorer.Forms
             if (result == DialogResult.OK)
             {
                 OpenVDF(openFileDialog1.FileName);
+                recentItems.AddItem(openFileDialog1.FileName);
+                recentItems.Save();
+                menuForm.RefreshRecentItems();
             } else
             {
                 Log.LogInfo("Browse cancelled");

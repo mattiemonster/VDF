@@ -10,11 +10,13 @@ namespace VDFExplorer.Forms
     {
         MenuForm menuForm;
         bool closedByUser = true;
+        RecentItems recent;
 
-        public NewVDF(MenuForm menu)
+        public NewVDF(MenuForm menu, RecentItems recentItems)
         {
             InitializeComponent();
             menuForm = menu;
+            recent = recentItems;
         }
 
         private void NewVDF_Load(object sender, EventArgs e)
@@ -62,10 +64,12 @@ namespace VDFExplorer.Forms
             VDF vdf = new VDF(nameTextBox.Text);
             vdf.Save(pathTextBox.Text);
 
-            Editor editor = new Editor(menuForm);
-            editor.Show();
+            Editor editor = new Editor(menuForm, recent);
             editor.OpenVDF(vdf);
             editor.SetPath(pathTextBox.Text);
+            recent.AddItem(pathTextBox.Text);
+            recent.Save();
+            editor.Show();
             closedByUser = false;
             Close();
         }

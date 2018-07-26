@@ -35,6 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
+            this.openSelectedButton = new System.Windows.Forms.Button();
+            this.removeSelectedButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -88,13 +90,10 @@
             // 
             // listBox1
             // 
-            this.listBox1.Enabled = false;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "Not implemented"});
             this.listBox1.Location = new System.Drawing.Point(12, 180);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(360, 264);
+            this.listBox1.Size = new System.Drawing.Size(360, 238);
             this.listBox1.TabIndex = 5;
             // 
             // openDialog
@@ -104,11 +103,33 @@
             this.openDialog.Filter = "VDF Files|*.vdf";
             this.openDialog.Title = "Open VDF file";
             // 
+            // openSelectedButton
+            // 
+            this.openSelectedButton.Location = new System.Drawing.Point(12, 426);
+            this.openSelectedButton.Name = "openSelectedButton";
+            this.openSelectedButton.Size = new System.Drawing.Size(180, 23);
+            this.openSelectedButton.TabIndex = 6;
+            this.openSelectedButton.Text = "Open Selected";
+            this.openSelectedButton.UseVisualStyleBackColor = true;
+            this.openSelectedButton.Click += new System.EventHandler(this.openSelectedButton_Click);
+            // 
+            // removeSelectedButton
+            // 
+            this.removeSelectedButton.Location = new System.Drawing.Point(192, 426);
+            this.removeSelectedButton.Name = "removeSelectedButton";
+            this.removeSelectedButton.Size = new System.Drawing.Size(180, 23);
+            this.removeSelectedButton.TabIndex = 7;
+            this.removeSelectedButton.Text = "Remove Selected";
+            this.removeSelectedButton.UseVisualStyleBackColor = true;
+            this.removeSelectedButton.Click += new System.EventHandler(this.removeSelectedButton_Click);
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 461);
+            this.Controls.Add(this.removeSelectedButton);
+            this.Controls.Add(this.openSelectedButton);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
@@ -119,6 +140,7 @@
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VDF Explorer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,6 +155,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.OpenFileDialog openDialog;
+        private System.Windows.Forms.Button openSelectedButton;
+        private System.Windows.Forms.Button removeSelectedButton;
     }
 }
 
