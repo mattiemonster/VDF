@@ -248,6 +248,45 @@ namespace VDFExplorer.Forms
             return result;
         }
 
+        private static DialogResult ShowIntBox(ref int input, string title)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(inputBoxWidth, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = title;
+            
+            NumericUpDown numericUpDown = new NumericUpDown();
+            numericUpDown.Size = new System.Drawing.Size(size.Width - 10, 23);
+            numericUpDown.Location = new System.Drawing.Point(5, 5);
+            numericUpDown.Maximum = decimal.MaxValue;
+            inputBox.Controls.Add(numericUpDown);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = (int)numericUpDown.Value;
+            return result;
+        }
+
         private void addItemToRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             VDFItemType type = VDFItemType.String;
@@ -262,13 +301,18 @@ namespace VDFExplorer.Forms
             {
                 case VDFItemType.String:
                     string input = "";
-                    ShowInputDialog(ref input, "String value");
+                    ShowInputDialog(ref input, "Set string");
                     item = new VDFStringItem(itemName, input);
                     break;
                 case VDFItemType.Boolean:
                     bool boolInput = false;
                     ShowBoolBox(ref boolInput, "Set bool");
                     item = new VDFBoolItem(itemName, boolInput);
+                    break;
+                case VDFItemType.Int:
+                    int intInput = 0;
+                    ShowIntBox(ref intInput, "Set int");
+                    item = new VDFIntItem(itemName, intInput);
                     break;
                 default:
                     return;
