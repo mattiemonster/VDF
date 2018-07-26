@@ -40,6 +40,8 @@ namespace VDFExplorer.Forms
 
             // GeneralUtil.Info("VDF Name: " + vdf.name);
             vdfNameText.Text = "VDF Name: " + vdf.name;
+
+            LoadVDF();
         }
 
         public void OpenVDF(VDF vdf)
@@ -49,6 +51,19 @@ namespace VDFExplorer.Forms
 
             // GeneralUtil.Info("VDF Name: " + vdf.name);
             vdfNameText.Text = "VDF Name: " + vdf.name;
+
+            LoadVDF();
+        }
+
+        public void LoadVDF()
+        {
+            // Catagories
+            foreach (VDFCatagory cat in vdf.catagories)
+            {
+                TreeNode node = new TreeNode(cat.name);
+                catagoryNodes.Add(cat, node);
+                treeView1.Nodes.Add(node);
+            }
         }
 
         public void SetPath(string newPath)
