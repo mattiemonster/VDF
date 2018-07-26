@@ -33,5 +33,16 @@ namespace VDFLib
             items.RemoveAt(index);
         }
 
+        public void SetItemValue(VDFItem item, object value)
+        {
+            foreach (VDFItem cItem in items)
+            {
+                if (cItem == item)
+                {
+                    cItem.value = value;
+                }
+            }
+        }
+
     }
 }
