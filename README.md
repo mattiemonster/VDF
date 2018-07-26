@@ -14,4 +14,4 @@ View the LICENSE file for a copy of GPLv3
 	* Creating and reading VDF files
 3. More data types
 	* Arrays
-	* Doubles, longs, etc
+	* Etc
