@@ -53,6 +53,17 @@ namespace VDFLib
             items.Add(item);
         }
 
+        public void AddItemToCatagory(VDFCatagory catagory, VDFItem item)
+        {
+            foreach (VDFCatagory cat in catagories)
+            {
+                if (cat == catagory)
+                {
+                    cat.AddItem(item);
+                }
+            }
+        }
+
         public void RemoveCatagory(VDFItem item)
         {
             items.Remove(item);

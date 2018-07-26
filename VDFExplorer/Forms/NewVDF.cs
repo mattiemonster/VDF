@@ -65,6 +65,7 @@ namespace VDFExplorer.Forms
             Editor editor = new Editor(menuForm);
             editor.Show();
             editor.OpenVDF(vdf);
+            editor.SetPath(pathTextBox.Text);
             closedByUser = false;
             Close();
         }

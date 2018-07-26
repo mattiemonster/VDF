@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 using VDFExplorer.Util;
 using VDFLib;
+using VDFLib.Items;
 
 namespace VDFExplorer.Forms
 {
@@ -11,6 +12,7 @@ namespace VDFExplorer.Forms
         public MenuForm menuForm;
         public VDF vdf;
         public string savePath;
+        public static int inputBoxWidth = 350;
 
         public Editor(MenuForm menu)
         {
@@ -23,7 +25,7 @@ namespace VDFExplorer.Forms
         public void OpenVDF(string path)
         {
             vdf = VDFReader.LoadVDF(path);
-            savePath = vdf.savePath;
+            savePath = path;
 
             GeneralUtil.Info("VDF Name: " + vdf.name);
         }
@@ -34,6 +36,11 @@ namespace VDFExplorer.Forms
             savePath = vdf.savePath;
 
             GeneralUtil.Info("VDF Name: " + vdf.name);
+        }
+
+        public void SetPath(string newPath)
+        {
+            savePath = newPath;
         }
 
         private void exitEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,7 +80,7 @@ namespace VDFExplorer.Forms
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GeneralUtil.NotImplementedError();
+            vdf.Save(savePath);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -93,6 +100,186 @@ namespace VDFExplorer.Forms
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("VDF Explorer. Utility program for viewing and editing VDF files.", "About");
+        }
+
+        private void addCatagoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string catagoryName = "Catagory";
+            ShowInputDialog(ref catagoryName, "Catagory name");
+
+            VDFCatagory catagory = new VDFCatagory(catagoryName);
+            vdf.AddCatagory(catagory);
+        }
+
+        private static DialogResult ShowInputDialog(ref string input, string title)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(inputBoxWidth, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = title;
+
+            System.Windows.Forms.TextBox textBox = new TextBox();
+            textBox.Size = new System.Drawing.Size(size.Width - 10, 23);
+            textBox.Location = new System.Drawing.Point(5, 5);
+            textBox.Text = input;
+            inputBox.Controls.Add(textBox);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = textBox.Text;
+            return result;
+        }
+
+        private static DialogResult ShowItemTypeBox(ref VDFItemType type, string title)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(inputBoxWidth, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = title;
+
+            ComboBox comboBox = new ComboBox();
+            comboBox.Size = new System.Drawing.Size(size.Width - 10, 23);
+            comboBox.Location = new System.Drawing.Point(5, 5);
+            comboBox.Items.Clear();
+            comboBox.Items.Add("String");
+            comboBox.Items.Add("Int");
+            comboBox.Items.Add("Float");
+            comboBox.Items.Add("Boolean");
+            comboBox.Items.Add("Double");
+            comboBox.Items.Add("Long");
+            inputBox.Controls.Add(comboBox);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            if (comboBox.SelectedIndex == 0)
+                type = VDFItemType.String;
+            else if (comboBox.SelectedIndex == 1)
+                type = VDFItemType.Int;
+            else if (comboBox.SelectedIndex == 2)
+                type = VDFItemType.Float;
+            else if (comboBox.SelectedIndex == 3)
+                type = VDFItemType.Boolean;
+            else if (comboBox.SelectedIndex == 4)
+                type = VDFItemType.Double;
+            else if (comboBox.SelectedIndex == 5)
+                type = VDFItemType.Long;
+            return result;
+        }
+
+        private static DialogResult ShowBoolBox(ref bool value, string title)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(inputBoxWidth, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = title;
+            
+            CheckBox checkBox = new CheckBox();
+            checkBox.Size = new System.Drawing.Size(size.Width - 10, 23);
+            checkBox.Location = new System.Drawing.Point(5, 5);
+            checkBox.Text = "Enabled";
+            inputBox.Controls.Add(checkBox);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            if (checkBox.Checked)
+                value = true;
+            else
+                value = false;
+            return result;
+        }
+
+        private void addItemToRootToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VDFItemType type = VDFItemType.String;
+            ShowItemTypeBox(ref type, "Item type");
+
+            string itemName = "Item";
+            ShowInputDialog(ref itemName, "Item name");
+
+            VDFItem item;
+
+            switch(type)
+            {
+                case VDFItemType.String:
+                    string input = "";
+                    ShowInputDialog(ref input, "String value");
+                    item = new VDFStringItem(itemName, input);
+                    break;
+                case VDFItemType.Boolean:
+                    bool boolInput = false;
+                    ShowBoolBox(ref boolInput, "Set bool");
+                    item = new VDFBoolItem(itemName, boolInput);
+                    break;
+                default:
+                    return;
+            }
+
+            vdf.items.Add(item);
+        }
+
+        private void Editor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            menuForm.Show();
         }
     }
 }
