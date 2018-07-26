@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 using VDFExplorer.Util;
@@ -13,6 +14,8 @@ namespace VDFExplorer.Forms
         public VDF vdf;
         public string savePath;
         public static int inputBoxWidth = 350;
+        public Dictionary<VDFCatagory, TreeNode> catagoryNodes;
+        public Dictionary<VDFItem, TreeNode> itemNodes;
 
         public Editor(MenuForm menu)
         {
@@ -20,6 +23,10 @@ namespace VDFExplorer.Forms
             menuForm = menu;
             Log.LogInfo("Opening editor");
             menuForm.Hide();
+
+            catagoryNodes = new Dictionary<VDFCatagory, TreeNode>();
+            itemNodes = new Dictionary<VDFItem, TreeNode>();
+            treeView1.Nodes.Clear();
         }
 
         public void OpenVDF(string path)
@@ -27,7 +34,8 @@ namespace VDFExplorer.Forms
             vdf = VDFReader.LoadVDF(path);
             savePath = path;
 
-            GeneralUtil.Info("VDF Name: " + vdf.name);
+            // GeneralUtil.Info("VDF Name: " + vdf.name);
+            vdfNameText.Text = "VDF Name: " + vdf.name;
         }
 
         public void OpenVDF(VDF vdf)
@@ -35,7 +43,8 @@ namespace VDFExplorer.Forms
             this.vdf = vdf;
             savePath = vdf.savePath;
 
-            GeneralUtil.Info("VDF Name: " + vdf.name);
+            // GeneralUtil.Info("VDF Name: " + vdf.name);
+            vdfNameText.Text = "VDF Name: " + vdf.name;
         }
 
         public void SetPath(string newPath)
@@ -324,6 +333,24 @@ namespace VDFExplorer.Forms
         private void Editor_FormClosing(object sender, FormClosingEventArgs e)
         {
             menuForm.Show();
+        }
+
+        void Rename()
+        {
+            string newName = "";
+            ShowInputDialog(ref newName, "Rename VDF");
+            vdf.name = newName;
+            vdfNameText.Text = "VDF Name: " + vdf.name;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Rename();
+        }
+
+        private void renameVDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Rename();
         }
     }
 }
