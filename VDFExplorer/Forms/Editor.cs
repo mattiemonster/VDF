@@ -22,6 +22,8 @@ namespace VDFExplorer.Forms
         public List<TreeNode> catagoryNodes;
         public List<TreeNode> itemNodes;
 
+        private int selectedType = 0;
+
         public RecentItems recentItems;
 
         public Editor(MenuForm menu, RecentItems newRecentItems)
@@ -638,11 +640,13 @@ namespace VDFExplorer.Forms
             {
                 typeLabel.Text = "Catagory";
                 type = 0;
+                selectedType = 0;
             }
             else if (nodeType[e.Node] == "Item")
             {
-                typeLabel.Text = "Item";
+                typeLabel.Text = "Item of type: " + itemViaNode[e.Node].type;
                 type = 1;
+                selectedType = 1;
             }
             else
             {
@@ -665,6 +669,27 @@ namespace VDFExplorer.Forms
                 changeValueButton.Enabled = true;
                 changeNameButton.Enabled = true;
             }
+        }
+
+        private void changeNameButton_Click(object sender, EventArgs e)
+        {
+            string newName = "";
+            string oldName = "Unknown";
+            ShowInputDialog(ref newName, "Set new name");
+
+            if (selectedType == 0)
+            {
+                oldName = catagoryViaNode[treeView1.SelectedNode].name;
+                catagoryViaNode[treeView1.SelectedNode].name = newName;
+            } else if (selectedType == 1)
+            {
+                oldName = itemViaNode[treeView1.SelectedNode].name;
+                itemViaNode[treeView1.SelectedNode].name = newName;
+            }
+
+            SetStatus("Set name of '" + oldName + "' to '" + newName + "'");
+
+            LoadVDF();
         }
     }
 }

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Catagory Item");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Catagory", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Item");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Catagory Item");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Catagory", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Item");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,15 +76,15 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(0, 55);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "CatagoryItem";
-            treeNode1.Text = "Catagory Item";
-            treeNode2.Name = "";
-            treeNode2.Text = "Catagory";
-            treeNode3.Name = "Item";
-            treeNode3.Text = "Item";
+            treeNode4.Name = "CatagoryItem";
+            treeNode4.Text = "Catagory Item";
+            treeNode5.Name = "";
+            treeNode5.Text = "Catagory";
+            treeNode6.Name = "Item";
+            treeNode6.Text = "Item";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
+            treeNode5,
+            treeNode6});
             this.treeView1.Size = new System.Drawing.Size(314, 484);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -347,6 +347,7 @@
             this.changeNameButton.TabIndex = 11;
             this.changeNameButton.Text = "Change";
             this.changeNameButton.UseVisualStyleBackColor = true;
+            this.changeNameButton.Click += new System.EventHandler(this.changeNameButton_Click);
             // 
             // changeTypeButton
             // 
