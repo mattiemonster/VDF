@@ -19,7 +19,7 @@ namespace VDFExplorer.Util
 
         public static void Error(string message)
         {
-            MessageBox.Show("Erorr: " + message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: " + message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Log.LogError(message);
         }
 

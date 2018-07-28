@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Catagory Item");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Catagory", new System.Windows.Forms.TreeNode[] {
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Item");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Catagory Item");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Catagory", new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Item");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,35 +43,42 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addCatagoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addCatagoryToSelectedCatagoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addItemToRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addItemToSelectedCatagoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.renameVDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.vDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addCatagoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addItemToRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vdfNameText = new System.Windows.Forms.Label();
-            this.renameVDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.button1 = new System.Windows.Forms.Button();
+            this.valueTitleLabel = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(0, 55);
             this.treeView1.Name = "treeView1";
-            treeNode7.Name = "CatagoryItem";
-            treeNode7.Text = "Catagory Item";
-            treeNode8.Name = "";
-            treeNode8.Text = "Catagory";
-            treeNode9.Name = "Item";
-            treeNode9.Text = "Item";
+            treeNode1.Name = "CatagoryItem";
+            treeNode1.Text = "Catagory Item";
+            treeNode2.Name = "";
+            treeNode2.Text = "Catagory";
+            treeNode3.Name = "Item";
+            treeNode3.Text = "Item";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9});
-            this.treeView1.Size = new System.Drawing.Size(314, 506);
+            treeNode2,
+            treeNode3});
+            this.treeView1.Size = new System.Drawing.Size(314, 484);
             this.treeView1.TabIndex = 0;
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
             // menuStrip1
             // 
@@ -149,6 +156,59 @@
             this.exitProgramToolStripMenuItem.Text = "Exit Program";
             this.exitProgramToolStripMenuItem.Click += new System.EventHandler(this.exitProgramToolStripMenuItem_Click);
             // 
+            // vDFToolStripMenuItem
+            // 
+            this.vDFToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addCatagoryToolStripMenuItem,
+            this.addCatagoryToSelectedCatagoryToolStripMenuItem,
+            this.addItemToRootToolStripMenuItem,
+            this.addItemToSelectedCatagoryToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.renameVDFToolStripMenuItem});
+            this.vDFToolStripMenuItem.Name = "vDFToolStripMenuItem";
+            this.vDFToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.vDFToolStripMenuItem.Text = "VDF";
+            // 
+            // addCatagoryToolStripMenuItem
+            // 
+            this.addCatagoryToolStripMenuItem.Name = "addCatagoryToolStripMenuItem";
+            this.addCatagoryToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.addCatagoryToolStripMenuItem.Text = "Add catagory";
+            this.addCatagoryToolStripMenuItem.Click += new System.EventHandler(this.addCatagoryToolStripMenuItem_Click);
+            // 
+            // addCatagoryToSelectedCatagoryToolStripMenuItem
+            // 
+            this.addCatagoryToSelectedCatagoryToolStripMenuItem.Name = "addCatagoryToSelectedCatagoryToolStripMenuItem";
+            this.addCatagoryToSelectedCatagoryToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.addCatagoryToSelectedCatagoryToolStripMenuItem.Text = "Add catagory to selected catagory";
+            this.addCatagoryToSelectedCatagoryToolStripMenuItem.Click += new System.EventHandler(this.addCatagoryToSelectedCatagoryToolStripMenuItem_Click);
+            // 
+            // addItemToRootToolStripMenuItem
+            // 
+            this.addItemToRootToolStripMenuItem.Name = "addItemToRootToolStripMenuItem";
+            this.addItemToRootToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.addItemToRootToolStripMenuItem.Text = "Add item to root";
+            this.addItemToRootToolStripMenuItem.Click += new System.EventHandler(this.addItemToRootToolStripMenuItem_Click);
+            // 
+            // addItemToSelectedCatagoryToolStripMenuItem
+            // 
+            this.addItemToSelectedCatagoryToolStripMenuItem.Name = "addItemToSelectedCatagoryToolStripMenuItem";
+            this.addItemToSelectedCatagoryToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.addItemToSelectedCatagoryToolStripMenuItem.Text = "Add item to selected catagory";
+            this.addItemToSelectedCatagoryToolStripMenuItem.Click += new System.EventHandler(this.addItemToSelectedCatagoryToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(251, 6);
+            // 
+            // renameVDFToolStripMenuItem
+            // 
+            this.renameVDFToolStripMenuItem.Name = "renameVDFToolStripMenuItem";
+            this.renameVDFToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.renameVDFToolStripMenuItem.Text = "Rename VDF";
+            this.renameVDFToolStripMenuItem.Click += new System.EventHandler(this.renameVDFToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -160,7 +220,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -176,31 +236,6 @@
             this.openFileDialog1.Filter = "VDF File|*.vdf";
             this.openFileDialog1.Title = "Open VDF file";
             // 
-            // vDFToolStripMenuItem
-            // 
-            this.vDFToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addCatagoryToolStripMenuItem,
-            this.addItemToRootToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.renameVDFToolStripMenuItem});
-            this.vDFToolStripMenuItem.Name = "vDFToolStripMenuItem";
-            this.vDFToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.vDFToolStripMenuItem.Text = "VDF";
-            // 
-            // addCatagoryToolStripMenuItem
-            // 
-            this.addCatagoryToolStripMenuItem.Name = "addCatagoryToolStripMenuItem";
-            this.addCatagoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addCatagoryToolStripMenuItem.Text = "Add catagory";
-            this.addCatagoryToolStripMenuItem.Click += new System.EventHandler(this.addCatagoryToolStripMenuItem_Click);
-            // 
-            // addItemToRootToolStripMenuItem
-            // 
-            this.addItemToRootToolStripMenuItem.Name = "addItemToRootToolStripMenuItem";
-            this.addItemToRootToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addItemToRootToolStripMenuItem.Text = "Add item to root";
-            this.addItemToRootToolStripMenuItem.Click += new System.EventHandler(this.addItemToRootToolStripMenuItem_Click);
-            // 
             // vdfNameText
             // 
             this.vdfNameText.AutoSize = true;
@@ -209,18 +244,6 @@
             this.vdfNameText.Size = new System.Drawing.Size(65, 13);
             this.vdfNameText.TabIndex = 2;
             this.vdfNameText.Text = "VDF Name: ";
-            // 
-            // renameVDFToolStripMenuItem
-            // 
-            this.renameVDFToolStripMenuItem.Name = "renameVDFToolStripMenuItem";
-            this.renameVDFToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.renameVDFToolStripMenuItem.Text = "Rename VDF";
-            this.renameVDFToolStripMenuItem.Click += new System.EventHandler(this.renameVDFToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // button1
             // 
@@ -232,11 +255,39 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // valueTitleLabel
+            // 
+            this.valueTitleLabel.AutoSize = true;
+            this.valueTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.valueTitleLabel.Location = new System.Drawing.Point(336, 55);
+            this.valueTitleLabel.Name = "valueTitleLabel";
+            this.valueTitleLabel.Size = new System.Drawing.Size(55, 20);
+            this.valueTitleLabel.TabIndex = 4;
+            this.valueTitleLabel.Text = "Value";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1264, 22);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(77, 17);
+            this.statusLabel.Text = "Editor loaded";
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 561);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.valueTitleLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.vdfNameText);
             this.Controls.Add(this.treeView1);
@@ -249,6 +300,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Editor_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,5 +330,10 @@
         private System.Windows.Forms.ToolStripMenuItem renameVDFToolStripMenuItem;
         private System.Windows.Forms.Label vdfNameText;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem addCatagoryToSelectedCatagoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addItemToSelectedCatagoryToolStripMenuItem;
+        private System.Windows.Forms.Label valueTitleLabel;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
     }
 }

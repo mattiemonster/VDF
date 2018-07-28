@@ -14,8 +14,11 @@ namespace VDFExplorer.Forms
         public VDF vdf;
         public string savePath;
         public static int inputBoxWidth = 350;
-        public Dictionary<VDFCatagory, TreeNode> catagoryNodes;
-        public Dictionary<VDFItem, TreeNode> itemNodes;
+        public Dictionary<VDFCatagory, TreeNode> catagories;
+        public Dictionary<TreeNode, VDFCatagory> catagoryViaNode;
+        public Dictionary<VDFItem, TreeNode> items;
+        public List<TreeNode> catagoryNodes;
+        public List<TreeNode> itemNodes;
 
         public RecentItems recentItems;
 
@@ -26,8 +29,11 @@ namespace VDFExplorer.Forms
             Log.LogInfo("Opening editor");
             menuForm.Hide();
 
-            catagoryNodes = new Dictionary<VDFCatagory, TreeNode>();
-            itemNodes = new Dictionary<VDFItem, TreeNode>();
+            catagories = new Dictionary<VDFCatagory, TreeNode>();
+            catagoryViaNode = new Dictionary<TreeNode, VDFCatagory>();
+            items = new Dictionary<VDFItem, TreeNode>();
+            catagoryNodes = new List<TreeNode>();
+            itemNodes = new List<TreeNode>();
             treeView1.Nodes.Clear();
 
             recentItems = newRecentItems;
@@ -57,13 +63,61 @@ namespace VDFExplorer.Forms
 
         public void LoadVDF()
         {
+            treeView1.Nodes.Clear();
+            catagories.Clear();
+            items.Clear();
+
             // Catagories
             foreach (VDFCatagory cat in vdf.catagories)
             {
                 TreeNode node = new TreeNode(cat.name);
-                catagoryNodes.Add(cat, node);
+                catagories.Add(cat, node);
+                foreach (VDFItem item in cat.items)
+                {
+                    TreeNode itemNode = new TreeNode(item.name);
+                    node.Nodes.Add(itemNode);
+                    itemNodes.Add(itemNode);
+                    items.Add(item, itemNode);
+                }
+                catagoryViaNode.Add(node, cat);
+                catagoryNodes.Add(node);
                 treeView1.Nodes.Add(node);
             }
+
+            // Items
+            foreach (VDFItem item in vdf.items)
+            {
+                TreeNode node = new TreeNode(item.name);
+                items.Add(item, node);
+                itemNodes.Add(node);
+                treeView1.Nodes.Add(node);
+            }
+
+            SetStatus("Loaded VDF: " + vdf.name);
+
+        }
+
+        public void LoadCatagory(VDFCatagory cat)
+        {
+
+            
+            //if (cat.catagories.Count != 0)
+            //{
+            //    foreach (VDFCatagory cata in cat.catagories)
+            //    {
+            //        LoadCatagory(cata, cat);
+            //    }
+            //}
+
+            //if (parent != null)
+            //{
+            //    TreeNode parentNode = catagories[parent];
+            //    catagories.Remove(parent);
+            //    parentNode.Nodes.Add(node);
+            //    // treeView1.Nodes.Add(parentNode);
+            //    catagories.Add(parent, parentNode);
+            //}
+
         }
 
         public void SetPath(string newPath)
@@ -138,8 +192,16 @@ namespace VDFExplorer.Forms
             string catagoryName = "Catagory";
             ShowInputDialog(ref catagoryName, "Catagory name");
 
+            if (string.IsNullOrEmpty(catagoryName))
+            {
+                GeneralUtil.Error("The catagory name must not be empty.");
+                return;
+            }
+
             VDFCatagory catagory = new VDFCatagory(catagoryName);
             vdf.AddCatagory(catagory);
+
+            LoadVDF();
         }
 
         private static DialogResult ShowInputDialog(ref string input, string title)
@@ -318,6 +380,84 @@ namespace VDFExplorer.Forms
             return result;
         }
 
+        private static DialogResult ShowDoubleBox(ref double input, string title, double maxValue)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(inputBoxWidth, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = title;
+
+            NumericUpDown numericUpDown = new NumericUpDown();
+            numericUpDown.Size = new System.Drawing.Size(size.Width - 10, 23);
+            numericUpDown.Location = new System.Drawing.Point(5, 5);
+            numericUpDown.Maximum = (decimal)maxValue;
+            inputBox.Controls.Add(numericUpDown);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = (int)numericUpDown.Value;
+            return result;
+        }
+        
+        private static DialogResult ShowLongBox(ref long input, string title, long maxValue)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(inputBoxWidth, 70);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = title;
+
+            NumericUpDown numericUpDown = new NumericUpDown();
+            numericUpDown.Size = new System.Drawing.Size(size.Width - 10, 23);
+            numericUpDown.Location = new System.Drawing.Point(5, 5);
+            numericUpDown.Maximum = (decimal)maxValue;
+            inputBox.Controls.Add(numericUpDown);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = (int)numericUpDown.Value;
+            return result;
+        }
+
         private void addItemToRootToolStripMenuItem_Click(object sender, EventArgs e)
         {
             VDFItemType type = VDFItemType.String;
@@ -345,11 +485,33 @@ namespace VDFExplorer.Forms
                     ShowIntBox(ref intInput, "Set int", int.MaxValue);
                     item = new VDFIntItem(itemName, intInput);
                     break;
+                case VDFItemType.Double:
+                    double doubleInput = 0;
+                    ShowDoubleBox(ref doubleInput, "Set double", double.MaxValue);
+                    item = new VDFDoubleItem(itemName, doubleInput);
+                    break;
+                case VDFItemType.Long:
+                    long longInput = 0;
+                    ShowLongBox(ref longInput, "Set long", long.MaxValue);
+                    item = new VDFLongItem(itemName, longInput);
+                    break;
+                case VDFItemType.Float:
+                    GeneralUtil.NotImplementedError("Float setting unavailable");
+                    item = new VDFFloatItem(itemName, 0.0f);
+                    break;
                 default:
                     return;
             }
 
+            SetStatus("Created item: " + item.name);
             vdf.items.Add(item);
+
+            LoadVDF();
+        }
+
+        void SetStatus(string msg)
+        {
+            statusStrip1.Items[0].Text = msg;
         }
 
         private void Editor_FormClosing(object sender, FormClosingEventArgs e)
@@ -373,6 +535,89 @@ namespace VDFExplorer.Forms
         private void renameVDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Rename();
+        }
+
+        private void addCatagoryToSelectedCatagoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //if (!catagoryNodes.Contains(treeView1.SelectedNode))
+            //{
+            //    GeneralUtil.Error("Selected object is not a catagory.");
+            //    return;
+            //}
+
+            //string catagoryName = "Catagory";
+            //ShowInputDialog(ref catagoryName, "Catagory name");
+
+            //if (string.IsNullOrEmpty(catagoryName))
+            //{
+            //    GeneralUtil.Error("The catagory name must not be empty.");
+            //    return;
+            //}
+
+            //VDFCatagory catagory = new VDFCatagory(catagoryName);
+            //// catagoryNodes[treeView1.SelectedNode.Index].Text = "HI!";
+            //vdf.catagories[treeView1.SelectedNode.Index].AddCatagory(catagory);
+
+            //LoadVDF();
+            GeneralUtil.NotImplementedError();
+        }
+
+        private void addItemToSelectedCatagoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VDFItemType type = VDFItemType.String;
+            if (ShowItemTypeBox(ref type, "Item type") == DialogResult.Cancel)
+                return;
+
+            string itemName = "Item";
+            if (ShowInputDialog(ref itemName, "Item name") == DialogResult.Cancel)
+                return;
+
+            VDFCatagory cat = catagoryViaNode[treeView1.SelectedNode];
+            VDFItem item;
+
+            switch (type)
+            {
+                case VDFItemType.String:
+                    string input = "String";
+                    ShowInputDialog(ref input, "Set string");
+                    item = new VDFStringItem(itemName, input);
+                    break;
+                case VDFItemType.Boolean:
+                    bool boolInput = false;
+                    ShowBoolBox(ref boolInput, "Set bool");
+                    item = new VDFBoolItem(itemName, boolInput);
+                    break;
+                case VDFItemType.Int:
+                    int intInput = 0;
+                    ShowIntBox(ref intInput, "Set int", int.MaxValue);
+                    item = new VDFIntItem(itemName, intInput);
+                    break;
+                case VDFItemType.Double:
+                    double doubleInput = 0;
+                    ShowDoubleBox(ref doubleInput, "Set double", double.MaxValue);
+                    item = new VDFDoubleItem(itemName, doubleInput);
+                    break;
+                case VDFItemType.Long:
+                    long longInput = 0;
+                    ShowLongBox(ref longInput, "Set long", long.MaxValue);
+                    item = new VDFLongItem(itemName, longInput);
+                    break;
+                case VDFItemType.Float:
+                    GeneralUtil.NotImplementedError("Float setting unavailable");
+                    item = new VDFFloatItem(itemName, 0.0f);
+                    break;
+                default:
+                    return;
+            }
+
+            cat.AddItem(item);
+            SetStatus("Created item: '" + item.name + "' in catagory: '" + cat.name + "'");
+
+            LoadVDF();
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
         }
     }
 }
