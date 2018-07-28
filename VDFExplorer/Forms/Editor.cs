@@ -17,6 +17,8 @@ namespace VDFExplorer.Forms
         public Dictionary<VDFCatagory, TreeNode> catagories;
         public Dictionary<TreeNode, VDFCatagory> catagoryViaNode;
         public Dictionary<VDFItem, TreeNode> items;
+        public Dictionary<TreeNode, VDFItem> itemViaNode;
+        public Dictionary<TreeNode, string> nodeType;
         public List<TreeNode> catagoryNodes;
         public List<TreeNode> itemNodes;
 
@@ -32,8 +34,10 @@ namespace VDFExplorer.Forms
             catagories = new Dictionary<VDFCatagory, TreeNode>();
             catagoryViaNode = new Dictionary<TreeNode, VDFCatagory>();
             items = new Dictionary<VDFItem, TreeNode>();
+            nodeType = new Dictionary<TreeNode, string>();
             catagoryNodes = new List<TreeNode>();
             itemNodes = new List<TreeNode>();
+            itemViaNode = new Dictionary<TreeNode, VDFItem>();
             treeView1.Nodes.Clear();
 
             recentItems = newRecentItems;
@@ -71,6 +75,7 @@ namespace VDFExplorer.Forms
             foreach (VDFCatagory cat in vdf.catagories)
             {
                 TreeNode node = new TreeNode(cat.name);
+                nodeType.Add(node, "Catagory");
                 catagories.Add(cat, node);
                 foreach (VDFItem item in cat.items)
                 {
@@ -78,6 +83,8 @@ namespace VDFExplorer.Forms
                     node.Nodes.Add(itemNode);
                     itemNodes.Add(itemNode);
                     items.Add(item, itemNode);
+                    itemViaNode.Add(itemNode, item);
+                    nodeType.Add(itemNode, "Item");
                 }
                 catagoryViaNode.Add(node, cat);
                 catagoryNodes.Add(node);
@@ -91,6 +98,8 @@ namespace VDFExplorer.Forms
                 items.Add(item, node);
                 itemNodes.Add(node);
                 treeView1.Nodes.Add(node);
+                nodeType.Add(node, "Item");
+                itemViaNode.Add(node, item);
             }
 
             SetStatus("Loaded VDF: " + vdf.name);
@@ -184,7 +193,7 @@ namespace VDFExplorer.Forms
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("VDF Explorer. Utility program for viewing and editing VDF files.", "About");
+            MessageBox.Show("VDF Explorer. Utility program for creating, viewing and editing VDF files.", "About");
         }
 
         private void addCatagoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -618,6 +627,44 @@ namespace VDFExplorer.Forms
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            int type = 0;
+
+            if (nodeType[e.Node] == "Catagory")
+            {
+                typeLabel.Text = "Catagory";
+                type = 0;
+            }
+            else if (nodeType[e.Node] == "Item")
+            {
+                typeLabel.Text = "Item";
+                type = 1;
+            }
+            else
+            {
+                typeLabel.Text = "No item or catagory selected";
+                return;
+            }
+
+            if (type == 0)
+            {
+                nameLabel.Text = catagoryViaNode[e.Node].name;
+                valueTitleLabel.Text = "Item Count";
+                valueLabel.Text = catagoryViaNode[e.Node].items.Count.ToString();
+                changeValueButton.Enabled = false;
+                changeNameButton.Enabled = true;
+            } else if (type == 1)
+            {
+                nameLabel.Text = itemViaNode[e.Node].name;
+                valueTitleLabel.Text = "Value";
+                valueLabel.Text = itemViaNode[e.Node].value.ToString();
+                changeValueButton.Enabled = true;
+                changeNameButton.Enabled = true;
+            }
         }
     }
 }

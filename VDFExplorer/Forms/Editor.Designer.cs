@@ -87,6 +87,7 @@
             treeNode3});
             this.treeView1.Size = new System.Drawing.Size(314, 484);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
             // menuStrip1
@@ -339,6 +340,7 @@
             // 
             // changeNameButton
             // 
+            this.changeNameButton.Enabled = false;
             this.changeNameButton.Location = new System.Drawing.Point(359, 93);
             this.changeNameButton.Name = "changeNameButton";
             this.changeNameButton.Size = new System.Drawing.Size(75, 23);
@@ -358,6 +360,7 @@
             // 
             // changeValueButton
             // 
+            this.changeValueButton.Enabled = false;
             this.changeValueButton.Location = new System.Drawing.Point(359, 232);
             this.changeValueButton.Name = "changeValueButton";
             this.changeValueButton.Size = new System.Drawing.Size(75, 23);
