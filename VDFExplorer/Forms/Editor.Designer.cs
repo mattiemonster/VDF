@@ -59,6 +59,15 @@
             this.valueTitleLabel = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.valueLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.nameTitleLabel = new System.Windows.Forms.Label();
+            this.typeLabel = new System.Windows.Forms.Label();
+            this.typeTitleLabel = new System.Windows.Forms.Label();
+            this.changeNameButton = new System.Windows.Forms.Button();
+            this.changeTypeButton = new System.Windows.Forms.Button();
+            this.changeValueButton = new System.Windows.Forms.Button();
+            this.notImplementedLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -259,7 +268,7 @@
             // 
             this.valueTitleLabel.AutoSize = true;
             this.valueTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valueTitleLabel.Location = new System.Drawing.Point(336, 55);
+            this.valueTitleLabel.Location = new System.Drawing.Point(336, 191);
             this.valueTitleLabel.Name = "valueTitleLabel";
             this.valueTitleLabel.Size = new System.Drawing.Size(55, 20);
             this.valueTitleLabel.TabIndex = 4;
@@ -281,11 +290,106 @@
             this.statusLabel.Size = new System.Drawing.Size(77, 17);
             this.statusLabel.Text = "Editor loaded";
             // 
+            // valueLabel
+            // 
+            this.valueLabel.AutoSize = true;
+            this.valueLabel.Location = new System.Drawing.Point(356, 215);
+            this.valueLabel.Name = "valueLabel";
+            this.valueLabel.Size = new System.Drawing.Size(86, 13);
+            this.valueLabel.TabIndex = 6;
+            this.valueLabel.Text = "No item selected";
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(356, 74);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(142, 13);
+            this.nameLabel.TabIndex = 8;
+            this.nameLabel.Text = "No item or catagory selected";
+            // 
+            // nameTitleLabel
+            // 
+            this.nameTitleLabel.AutoSize = true;
+            this.nameTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameTitleLabel.Location = new System.Drawing.Point(336, 50);
+            this.nameTitleLabel.Name = "nameTitleLabel";
+            this.nameTitleLabel.Size = new System.Drawing.Size(55, 20);
+            this.nameTitleLabel.TabIndex = 7;
+            this.nameTitleLabel.Text = "Name";
+            // 
+            // typeLabel
+            // 
+            this.typeLabel.AutoSize = true;
+            this.typeLabel.Location = new System.Drawing.Point(356, 145);
+            this.typeLabel.Name = "typeLabel";
+            this.typeLabel.Size = new System.Drawing.Size(142, 13);
+            this.typeLabel.TabIndex = 10;
+            this.typeLabel.Text = "No item or catagory selected";
+            // 
+            // typeTitleLabel
+            // 
+            this.typeTitleLabel.AutoSize = true;
+            this.typeTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeTitleLabel.Location = new System.Drawing.Point(336, 121);
+            this.typeTitleLabel.Name = "typeTitleLabel";
+            this.typeTitleLabel.Size = new System.Drawing.Size(47, 20);
+            this.typeTitleLabel.TabIndex = 9;
+            this.typeTitleLabel.Text = "Type";
+            // 
+            // changeNameButton
+            // 
+            this.changeNameButton.Location = new System.Drawing.Point(359, 93);
+            this.changeNameButton.Name = "changeNameButton";
+            this.changeNameButton.Size = new System.Drawing.Size(75, 23);
+            this.changeNameButton.TabIndex = 11;
+            this.changeNameButton.Text = "Change";
+            this.changeNameButton.UseVisualStyleBackColor = true;
+            // 
+            // changeTypeButton
+            // 
+            this.changeTypeButton.Enabled = false;
+            this.changeTypeButton.Location = new System.Drawing.Point(359, 163);
+            this.changeTypeButton.Name = "changeTypeButton";
+            this.changeTypeButton.Size = new System.Drawing.Size(75, 23);
+            this.changeTypeButton.TabIndex = 12;
+            this.changeTypeButton.Text = "Change";
+            this.changeTypeButton.UseVisualStyleBackColor = true;
+            // 
+            // changeValueButton
+            // 
+            this.changeValueButton.Location = new System.Drawing.Point(359, 232);
+            this.changeValueButton.Name = "changeValueButton";
+            this.changeValueButton.Size = new System.Drawing.Size(75, 23);
+            this.changeValueButton.TabIndex = 13;
+            this.changeValueButton.Text = "Change";
+            this.changeValueButton.UseVisualStyleBackColor = true;
+            // 
+            // notImplementedLabel
+            // 
+            this.notImplementedLabel.AutoSize = true;
+            this.notImplementedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notImplementedLabel.ForeColor = System.Drawing.Color.Red;
+            this.notImplementedLabel.Location = new System.Drawing.Point(440, 168);
+            this.notImplementedLabel.Name = "notImplementedLabel";
+            this.notImplementedLabel.Size = new System.Drawing.Size(86, 13);
+            this.notImplementedLabel.TabIndex = 14;
+            this.notImplementedLabel.Text = "Not implemented";
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 561);
+            this.Controls.Add(this.notImplementedLabel);
+            this.Controls.Add(this.changeValueButton);
+            this.Controls.Add(this.changeTypeButton);
+            this.Controls.Add(this.changeNameButton);
+            this.Controls.Add(this.typeLabel);
+            this.Controls.Add(this.typeTitleLabel);
+            this.Controls.Add(this.nameLabel);
+            this.Controls.Add(this.nameTitleLabel);
+            this.Controls.Add(this.valueLabel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.valueTitleLabel);
             this.Controls.Add(this.button1);
@@ -335,5 +439,14 @@
         private System.Windows.Forms.Label valueTitleLabel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.Label valueLabel;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label nameTitleLabel;
+        private System.Windows.Forms.Label typeLabel;
+        private System.Windows.Forms.Label typeTitleLabel;
+        private System.Windows.Forms.Button changeNameButton;
+        private System.Windows.Forms.Button changeTypeButton;
+        private System.Windows.Forms.Button changeValueButton;
+        private System.Windows.Forms.Label notImplementedLabel;
     }
 }
