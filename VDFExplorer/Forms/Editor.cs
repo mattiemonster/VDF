@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -670,7 +671,7 @@ namespace VDFExplorer.Forms
                 changeNameButton.Enabled = true;
             }
         }
-
+        
         private void changeNameButton_Click(object sender, EventArgs e)
         {
             string newName = "";
@@ -690,6 +691,20 @@ namespace VDFExplorer.Forms
             SetStatus("Set name of '" + oldName + "' to '" + newName + "'");
 
             LoadVDF();
+        }
+
+        private void deleteVDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (GeneralUtil.AskYesNo("Are you sure you want to delete the current VDF? This cannot be undone." +
+                " The editor will close after this operation.",
+                "Deleting VDF"))
+            {
+                File.Delete(savePath);
+                recentItems.RemoveItem(savePath);
+                recentItems.Save();
+                menuForm.Show();
+                Close();
+            }
         }
     }
 }
